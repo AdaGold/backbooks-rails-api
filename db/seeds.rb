@@ -1,10 +1,9 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Book data was copied from the Goodreads list of feminist literature
+# https://www.goodreads.com/shelf/show/feminist-literature
+# To clean it up, I used a tasty regex search/replace
+# search: /(.*) \(.*\) \nby (.*) \(.*\) \n.*published (\d{4})\n.*\n.*\n.*stars/
+# replace with: '{ "title": "$1", "author": "$2", "publication_year": $3 },'
+# Took a little extra cleanup beyond that, but that got me 90% of the way
 
 puts "Purging existing book data"
 Book.destroy_all
