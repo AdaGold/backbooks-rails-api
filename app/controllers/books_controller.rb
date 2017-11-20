@@ -1,6 +1,9 @@
 class BooksController < ApplicationController
   def index
-    render json: Book.all.as_json(only: [:id, :title, :author, :publication_year])
+    render json: {
+      count: Book.count,
+      books: Book.all.as_json(only: [:id, :title, :author, :publication_year])
+    }
   end
 
   def create

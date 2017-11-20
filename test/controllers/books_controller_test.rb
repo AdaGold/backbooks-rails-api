@@ -8,11 +8,15 @@ describe BooksController do
 
       response.header['Content-Type'].must_include 'json'
       body = JSON.parse(response.body)
-      body.must_be_kind_of Array
-      body.length.must_equal Book.count
+      body.must_be_kind_of Hash
+      body.must_include "count"
+      body.must_include "books"
+      body["count"].must_equal Book.count
+      body["books"].must_be_kind_of Array
+      body["books"].length.must_equal Book.count
 
       keys = %w(id title author publication_year).sort
-      body.each do |book|
+      body["books"].each do |book|
         book.keys.sort.must_equal keys
       end
     end
@@ -25,8 +29,12 @@ describe BooksController do
 
       response.header['Content-Type'].must_include 'json'
       body = JSON.parse(response.body)
-      body.must_be_kind_of Array
-      body.length.must_equal 0
+      body.must_be_kind_of Hash
+      body.must_include "count"
+      body.must_include "books"
+      body["count"].must_equal 0
+      body["books"].must_be_kind_of Array
+      body["books"].length.must_equal 0
     end
   end
 
