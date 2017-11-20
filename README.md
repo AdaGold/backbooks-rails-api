@@ -1,24 +1,24 @@
-# README
+# BackBooks Rails API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the companion API for the BackBooks live-code from the first week of our Backbone curriculum.
 
-Things you may want to cover:
+## Installation
 
-* Ruby version
+```
+git clone <whatever>
+cd backbone-rails-api
+bundle install
+rails db:create
+rails db:migrate
+rails db:seed
+```
 
-* System dependencies
+## Running the Server
 
-* Configuration
+```
+rails server
+```
 
-* Database creation
+## Regarding CORS
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This API assumes you're running our standard Webpack3 setup, which will run a server on localhost port 8080. If that's not true, you'll need to go into `config/initializers/cors.rb` and change the line `origins locahost:8080` to whatever suits your fancy.
