@@ -11,7 +11,7 @@ describe BooksController do
       body.must_be_kind_of Array
       body.length.must_equal Book.count
 
-      keys = %w(id, title, author, publication_year).sort
+      keys = %w(id title author publication_year).sort
       body.each do |book|
         book.keys.sort.must_equal keys
       end
@@ -35,7 +35,7 @@ describe BooksController do
 
     it "creates a book from valid data" do
       # Assumption: book data is valid
-      Book.new(raw_book).must_be :vaild?
+      Book.new(raw_book).must_be :valid?
 
       start_count = Book.count
 
@@ -56,14 +56,14 @@ describe BooksController do
     it "returns an error and creates no book from invalid data" do
       # Assumption: book data is invalid with no title
       raw_book[:title] = ""
-      Book.new(raw_book).wont_be :vaild?
+      Book.new(raw_book).wont_be :valid?
 
       start_count = Book.count
 
       post books_url, params: { book: raw_book }
-      must_respond_with :error
+      must_respond_with :bad_request
 
-      Book.count.must_equal start_count + 1
+      Book.count.must_equal start_count
 
       body = JSON.parse(response.body)
       body.must_be_kind_of Hash
