@@ -6,7 +6,7 @@ This is the companion API for the BackBooks live-code from the first week of our
 
 ```
 git clone <whatever>
-cd backbone-rails-api
+cd backbooks-rails-api
 bundle install
 rails db:create
 rails db:migrate
